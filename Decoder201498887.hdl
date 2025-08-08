@@ -6,7 +6,6 @@ CHIP Decoder201498887 {
   Not (in=B, out=nB);
   Not (in=C, out=nC);
   Not (in=D, out=nD);
- 
   And (a=A, b=nC, out=aterm1);
   And (a=B, b=C, out=atmp2);
   And (a=atmp2, b=nD, out=aterm2);
@@ -20,7 +19,6 @@ CHIP Decoder201498887 {
   Or (a=aor1, b=aterm3, out=aor2);
   Or (a=aor2, b=aterm4, out=aor3);
   Or (a=aor3, b=aterm5, out=a);
- 
   And (a=A, b=B, out=b1);
   And (a=A, b=C, out=b2);
   And (a=b2, b=D, out=b3);
@@ -52,7 +50,6 @@ CHIP Decoder201498887 {
   Or (a=cor4, b=cterm6, out=cor5);
   Or (a=cor5, b=cterm7, out=cor6);
   Or (a=cor6, b=cterm8, out=c);
- 
   And (a=C, b=D, out=dtmp2);
   And (a=dtmp2, b=nA, out=dterm2);
   And (a=nA, b=nC, out=dtmp3);
@@ -61,7 +58,11 @@ CHIP Decoder201498887 {
   Or (a=dor1, b=dterm3, out=d);
   // Segment e = std_c: B | D | ~C
   Or (a=B, b=D, out=eor1);
-  Or (a=eor1, b=nC, out=e);
+  Or (a=eor1, b=nC, out=eor2);
+  And (a=A, b=nB, out=etmp1);
+  And (a=etmp1, b=C, out=etmp2);
+  And (a=etmp2, b=nD, out=eterm1);
+  Or (a=eor2, b=eterm1, out=e);
   And (a=A, b=D, out=fterm1);
   And (a=A, b=nB, out=fterm2);
   And (a=C, b=nB, out=fterm3);
@@ -72,7 +73,6 @@ CHIP Decoder201498887 {
   Or (a=for1, b=fterm3, out=for2);
   Or (a=for2, b=fterm4, out=for3);
   Or (a=for3, b=fterm5, out=f);
- 
   And (a=B, b=nC, out=gterm2);
   And (a=B, b=nD, out=gterm3);
   And (a=nC, b=nD, out=gterm4);
