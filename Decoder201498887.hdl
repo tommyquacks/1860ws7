@@ -6,7 +6,7 @@ CHIP Decoder201498887 {
         Not(in=B, out=notB);
         Not(in=C, out=notC);
         Not(in=D, out=notD);
-        // Segment a: 
+        // Segment a: (x & y) | (w & ~z) | (y & ~w) | (~x & ~z) | (x & z & ~w) | (w & ~x & ~y)
         And(a=B, b=C, out=termA1);
         And(a=A, b=notD, out=termA2);
         And(a=C, b=notA, out=termA3);
@@ -20,7 +20,7 @@ CHIP Decoder201498887 {
         Or(a=tmpA8, b=termA4, out=tmpA9);
         Or(a=tmpA9, b=termA5, out=tmpA10);
         Or(a=tmpA10, b=termA6, out=a);
-        // Segment b: 
+        // Segment b: (~w & ~x) | (~x & ~z) | (w & z & ~y) | (y & z & ~w) | (~w & ~y & ~z)
         And(a=notA, b=notB, out=termB1);
         And(a=notB, b=notD, out=termB2);
         And(a=A, b=D, out=tmpB3);
@@ -33,7 +33,7 @@ CHIP Decoder201498887 {
         Or(a=tmpB6, b=termB3, out=tmpB7);
         Or(a=tmpB7, b=termB4, out=tmpB8);
         Or(a=tmpB8, b=termB5, out=b);
-        // Segment c: 
+        // Segment c: (w & ~x) | (x & ~w) | (z & ~w) | (z & ~y) | (~w & ~y)
         And(a=A, b=notB, out=termC1);
         And(a=B, b=notA, out=termC2);
         And(a=D, b=notA, out=termC3);
@@ -43,7 +43,7 @@ CHIP Decoder201498887 {
         Or(a=tmpC6, b=termC3, out=tmpC7);
         Or(a=tmpC7, b=termC4, out=tmpC8);
         Or(a=tmpC8, b=termC5, out=c);
-        // Segment d: 
+        // Segment d: (w & ~y) | (x & y & ~z) | (x & z & ~y) | (y & z & ~x) | (~w & ~x & ~z)
         And(a=A, b=notC, out=termD1);
         And(a=B, b=C, out=tmpD2);
         And(a=tmpD2, b=notD, out=termD2);
@@ -57,7 +57,7 @@ CHIP Decoder201498887 {
         Or(a=tmpD6, b=termD3, out=tmpD7);
         Or(a=tmpD7, b=termD4, out=tmpD8);
         Or(a=tmpD8, b=termD5, out=d);
-        // Segment e: 
+        // Segment e: (w & x) | (w & y) | (y & ~z) | (~x & ~z)
         And(a=A, b=B, out=termE1);
         And(a=A, b=C, out=termE2);
         And(a=C, b=notD, out=termE3);
@@ -65,7 +65,7 @@ CHIP Decoder201498887 {
         Or(a=termE1, b=termE2, out=tmpE5);
         Or(a=tmpE5, b=termE3, out=tmpE6);
         Or(a=tmpE6, b=termE4, out=e);
-        // Segment f: 
+        // Segment f: (w & y) | (w & ~x) | (x & ~z) | (~y & ~z) | (x & ~w & ~y)
         And(a=A, b=C, out=termF1);
         And(a=A, b=notB, out=termF2);
         And(a=B, b=notD, out=termF3);
@@ -76,7 +76,7 @@ CHIP Decoder201498887 {
         Or(a=tmpF6, b=termF3, out=tmpF7);
         Or(a=tmpF7, b=termF4, out=tmpF8);
         Or(a=tmpF8, b=termF5, out=f);
-        // Segment g: 
+        // Segment g: (w & z) | (w & ~x) | (y & ~x) | (y & ~z) | (x & ~w & ~y)
         And(a=A, b=D, out=termG1);
         And(a=A, b=notB, out=termG2);
         And(a=C, b=notB, out=termG3);
