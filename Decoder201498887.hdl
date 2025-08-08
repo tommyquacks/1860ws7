@@ -1,90 +1,87 @@
 CHIP Decoder201498887 {
-    IN A, B, C, D; 
-    OUT a, b, c, d, e, f, g;
-    PARTS:
-        Not(in=A, out=notA);
-        Not(in=B, out=notB);
-        Not(in=C, out=notC);
-        Not(in=D, out=notD);
-        // Segment a: (w & ~y) | (x & y & ~z) | (x & z & ~y) | (y & z & ~x) | (~w & ~x & ~z)
-        And(a=A, b=notC, out=termA1);
-        And(a=B, b=C, out=tmpA2);
-        And(a=tmpA2, b=notD, out=termA2);
-        And(a=B, b=D, out=tmpA3);
-        And(a=tmpA3, b=notC, out=termA3);
-        And(a=C, b=D, out=tmpA4);
-        And(a=tmpA4, b=notB, out=termA4);
-        And(a=notA, b=notB, out=tmpA5);
-        And(a=tmpA5, b=notD, out=termA5);
-        Or(a=termA1, b=termA2, out=tmpA6);
-        Or(a=tmpA6, b=termA3, out=tmpA7);
-        Or(a=tmpA7, b=termA4, out=tmpA8);
-        Or(a=tmpA8, b=termA5, out=a);
-        // Segment b: (w & z) | (w & ~x) | (y & ~x) | (y & ~z) | (x & ~w & ~y)
-        And(a=A, b=D, out=termB1);
-        And(a=A, b=notB, out=termB2);
-        And(a=C, b=notB, out=termB3);
-        And(a=C, b=notD, out=termB4);
-        And(a=B, b=notA, out=tmpB5);
-        And(a=tmpB5, b=notC, out=termB5);
-        Or(a=termB1, b=termB2, out=tmpB6);
-        Or(a=tmpB6, b=termB3, out=tmpB7);
-        Or(a=tmpB7, b=termB4, out=tmpB8);
-        Or(a=tmpB8, b=termB5, out=b);
-        // Segment c: (x & y) | (w & ~z) | (y & ~w) | (~x & ~z) | (x & z & ~w) | (w & ~x & ~y)
-        And(a=B, b=C, out=termC1);
-        And(a=A, b=notD, out=termC2);
-        And(a=C, b=notA, out=termC3);
-        And(a=notB, b=notD, out=termC4);
-        And(a=B, b=D, out=tmpC5);
-        And(a=tmpC5, b=notA, out=termC5);
-        And(a=A, b=notB, out=tmpC6);
-        And(a=tmpC6, b=notC, out=termC6);
-        Or(a=termC1, b=termC2, out=tmpC7);
-        Or(a=tmpC7, b=termC3, out=tmpC8);
-        Or(a=tmpC8, b=termC4, out=tmpC9);
-        Or(a=tmpC9, b=termC5, out=tmpC10);
-        Or(a=tmpC10, b=termC6, out=c);
-        // Segment d: (~w & ~x) | (~x & ~z) | (w & z & ~y) | (y & z & ~w) | (~w & ~y & ~z)
-        And(a=notA, b=notB, out=termD1);
-        And(a=notB, b=notD, out=termD2);
-        And(a=A, b=D, out=tmpD3);
-        And(a=tmpD3, b=notC, out=termD3);
-        And(a=C, b=D, out=tmpD4);
-        And(a=tmpD4, b=notA, out=termD4);
-        And(a=notA, b=notC, out=tmpD5);
-        And(a=tmpD5, b=notD, out=termD5);
-        Or(a=termD1, b=termD2, out=tmpD6);
-        Or(a=tmpD6, b=termD3, out=tmpD7);
-        Or(a=tmpD7, b=termD4, out=tmpD8);
-        Or(a=tmpD8, b=termD5, out=d);
-        // Segment e: (w & ~x) | (x & ~w) | (z & ~w) | (z & ~y) | (~w & ~y)
-        And(a=A, b=notB, out=termE1);
-        And(a=B, b=notA, out=termE2);
-        And(a=D, b=notA, out=termE3);
-        And(a=D, b=notC, out=termE4);
-        And(a=notA, b=notC, out=termE5);
-        Or(a=termE1, b=termE2, out=tmpE6);
-        Or(a=tmpE6, b=termE3, out=tmpE7);
-        Or(a=tmpE7, b=termE4, out=tmpE8);
-        Or(a=tmpE8, b=termE5, out=e);
-        // Segment f: (w & x) | (w & y) | (y & ~z) | (~x & ~z)
-        And(a=A, b=B, out=termF1);
-        And(a=A, b=C, out=termF2);
-        And(a=C, b=notD, out=termF3);
-        And(a=notB, b=notD, out=termF4);
-        Or(a=termF1, b=termF2, out=tmpF5);
-        Or(a=tmpF5, b=termF3, out=tmpF6);
-        Or(a=tmpF6, b=termF4, out=f);
-        // Segment g: (w & y) | (w & ~x) | (x & ~z) | (~y & ~z) | (x & ~w & ~y)
-        And(a=A, b=C, out=termG1);
-        And(a=A, b=notB, out=termG2);
-        And(a=B, b=notD, out=termG3);
-        And(a=notC, b=notD, out=termG4);
-        And(a=B, b=notA, out=tmpG5);
-        And(a=tmpG5, b=notC, out=termG5);
-        Or(a=termG1, b=termG2, out=tmpG6);
-        Or(a=tmpG6, b=termG3, out=tmpG7);
-        Or(a=tmpG7, b=termG4, out=tmpG8);
-        Or(a=tmpG8, b=termG5, out=g);
+  IN A, B, C, D;
+  OUT a, b, c, d, e, f, g;
+  PARTS:
+  Not (in=A, out=nA);
+  Not (in=B, out=nB);
+  Not (in=C, out=nC);
+  Not (in=D, out=nD);
+
+  
+  And (a=A, b=nC, out=aterm1);
+  And (a=B, b=C, out=atmp2);
+  And (a=atmp2, b=nD, out=aterm2);
+  And (a=B, b=nC, out=atmp3);
+  And (a=atmp3, b=D, out=aterm3);
+  And (a=nB, b=C, out=atmp4);
+  And (a=atmp4, b=D, out=aterm4);
+  And (a=nA, b=nB, out=atmp5);
+  And (a=atmp5, b=nD, out=aterm5);
+  Or (a=aterm1, b=aterm2, out=aor1);
+  Or (a=aor1, b=aterm3, out=aor2);
+  Or (a=aor2, b=aterm4, out=aor3);
+  Or (a=aor3, b=aterm5, out=a);
+
+  
+  And (a=A, b=B, out=b1);
+  And (a=A, b=C, out=b2);
+  And (a=b2, b=D, out=b3);
+  And (a=C, b=nD, out=b4);
+  And (a=nC, b=nD, out=b5);
+  And (a=b5, b=nB, out=b6);
+  Or (a=b1, b=b4, out=b7);
+  Or (a=b3, b=b6, out=b8);
+  Or (a=b7, b=b8, out=b);
+
+ 
+  And (a=A, b=nD, out=cterm1);
+  And (a=C, b=nD, out=cterm2);
+  And (a=A, b=B, out=ctmp3);
+  And (a=ctmp3, b=C, out=cterm3);
+  And (a=nB, b=nD, out=cterm4);
+  And (a=A, b=nB, out=ctmp5);
+  And (a=ctmp5, b=nC, out=cterm5);
+  And (a=nA, b=nB, out=ctmp6);
+  And (a=ctmp6, b=C, out=cterm6);
+  And (a=B, b=D, out=ctmp7a);
+  And (a=ctmp7a, b=nA, out=ctmp7b);
+  And (a=ctmp7b, b=nC, out=cterm7);
+  Or (a=cterm1, b=cterm2, out=cor1);
+  Or (a=cor1, b=cterm3, out=cor2);
+  Or (a=cor2, b=cterm4, out=cor3);
+  Or (a=cor3, b=cterm5, out=cor4);
+  Or (a=cor4, b=cterm6, out=cor5);
+  Or (a=cor5, b=cterm7, out=c);
+
+  
+  And (a=C, b=D, out=dtmp2);
+  And (a=dtmp2, b=nA, out=dterm2);
+  And (a=nA, b=nC, out=dtmp3);
+  And (a=dtmp3, b=nD, out=dterm3);
+  Or (a=nB, b=dterm2, out=dor1);
+  Or (a=dor1, b=dterm3, out=d);
+
+  // Segment e = std_c: B | D | ~C
+  Or (a=B, b=D, out=eor1);
+  Or (a=eor1, b=nC, out=e);
+
+ 
+  And (a=A, b=D, out=fterm1);
+  And (a=A, b=nB, out=fterm2);
+  And (a=C, b=nB, out=fterm3);
+  And (a=C, b=nD, out=fterm4);
+  And (a=B, b=nA, out=ftmp5);
+  And (a=ftmp5, b=nC, out=fterm5);
+  Or (a=fterm1, b=fterm2, out=for1);
+  Or (a=for1, b=fterm3, out=for2);
+  Or (a=for2, b=fterm4, out=for3);
+  Or (a=for3, b=fterm5, out=f);
+
+  
+  And (a=B, b=nC, out=gterm2);
+  And (a=B, b=nD, out=gterm3);
+  And (a=nC, b=nD, out=gterm4);
+  Or (a=A, b=gterm2, out=gor1);
+  Or (a=gor1, b=gterm3, out=gor2);
+  Or (a=gor2, b=gterm4, out=g);
 }
