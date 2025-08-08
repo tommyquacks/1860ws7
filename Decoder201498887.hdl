@@ -6,8 +6,7 @@ CHIP Decoder201498887 {
   Not (in=B, out=nB);
   Not (in=C, out=nC);
   Not (in=D, out=nD);
-
-  
+ 
   And (a=A, b=nC, out=aterm1);
   And (a=B, b=C, out=atmp2);
   And (a=atmp2, b=nD, out=aterm2);
@@ -21,8 +20,7 @@ CHIP Decoder201498887 {
   Or (a=aor1, b=aterm3, out=aor2);
   Or (a=aor2, b=aterm4, out=aor3);
   Or (a=aor3, b=aterm5, out=a);
-
-  
+ 
   And (a=A, b=B, out=b1);
   And (a=A, b=C, out=b2);
   And (a=b2, b=D, out=b3);
@@ -32,8 +30,6 @@ CHIP Decoder201498887 {
   Or (a=b1, b=b4, out=b7);
   Or (a=b3, b=b6, out=b8);
   Or (a=b7, b=b8, out=b);
-
- 
   And (a=A, b=nD, out=cterm1);
   And (a=C, b=nD, out=cterm2);
   And (a=A, b=B, out=ctmp3);
@@ -46,26 +42,26 @@ CHIP Decoder201498887 {
   And (a=B, b=D, out=ctmp7a);
   And (a=ctmp7a, b=nA, out=ctmp7b);
   And (a=ctmp7b, b=nC, out=cterm7);
+  And (a=nA, b=B, out=ctmp8a);
+  And (a=ctmp8a, b=C, out=ctmp8b);
+  And (a=ctmp8b, b=D, out=cterm8);
   Or (a=cterm1, b=cterm2, out=cor1);
   Or (a=cor1, b=cterm3, out=cor2);
   Or (a=cor2, b=cterm4, out=cor3);
   Or (a=cor3, b=cterm5, out=cor4);
   Or (a=cor4, b=cterm6, out=cor5);
-  Or (a=cor5, b=cterm7, out=c);
-
-  
+  Or (a=cor5, b=cterm7, out=cor6);
+  Or (a=cor6, b=cterm8, out=c);
+ 
   And (a=C, b=D, out=dtmp2);
   And (a=dtmp2, b=nA, out=dterm2);
   And (a=nA, b=nC, out=dtmp3);
   And (a=dtmp3, b=nD, out=dterm3);
   Or (a=nB, b=dterm2, out=dor1);
   Or (a=dor1, b=dterm3, out=d);
-
   // Segment e = std_c: B | D | ~C
   Or (a=B, b=D, out=eor1);
   Or (a=eor1, b=nC, out=e);
-
- 
   And (a=A, b=D, out=fterm1);
   And (a=A, b=nB, out=fterm2);
   And (a=C, b=nB, out=fterm3);
@@ -76,8 +72,7 @@ CHIP Decoder201498887 {
   Or (a=for1, b=fterm3, out=for2);
   Or (a=for2, b=fterm4, out=for3);
   Or (a=for3, b=fterm5, out=f);
-
-  
+ 
   And (a=B, b=nC, out=gterm2);
   And (a=B, b=nD, out=gterm3);
   And (a=nC, b=nD, out=gterm4);
@@ -85,3 +80,4 @@ CHIP Decoder201498887 {
   Or (a=gor1, b=gterm3, out=gor2);
   Or (a=gor2, b=gterm4, out=g);
 }
+
