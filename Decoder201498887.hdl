@@ -59,8 +59,12 @@ CHIP Decoder201498887 {
   Not (in=excluded, out=nexcluded);
   And (a=nB, b=nexcluded, out=gatednB);
   Or (a=gatednB, b=dterm2, out=dor1);
-  Or (a=dor1, b=dterm3, out=d);
-  // Segment e = std_c: B | D | ~C
+  Or (a=dor1, b=dterm3, out=oldd);
+  And (a=A, b=B, out=stmp1);
+  And (a=stmp1, b=nC, out=stmp2);
+  And (a=stmp2, b=D, out=specific);
+  Or (a=oldd, b=specific, out=d);
+  // Segment e = stdc: B | D | ~C
   Or (a=B, b=D, out=eor1);
   Or (a=eor1, b=nC, out=eor2);
   And (a=A, b=nB, out=etmp1);
@@ -87,6 +91,10 @@ CHIP Decoder201498887 {
   And (a=nC, b=nD, out=gterm4);
   Or (a=A, b=gterm2, out=gor1);
   Or (a=gor1, b=gterm3, out=gor2);
-  Or (a=gor2, b=gterm4, out=g);
+  Or (a=gor2, b=gterm4, out=oldg);
+  Not (in=specific, out=nspecific);
+  And (a=oldg, b=nspecific, out=g);
 }
+
+
 
