@@ -1,4 +1,4 @@
-CHIP Decoder201498887 {
+CHIP Decoder2356104 {
     IN in[4];  // in[3]=w, in[2]=x, in[1]=y, in[0]=z
     OUT a, b, c, d, e, f, g;
 
