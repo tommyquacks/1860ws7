@@ -55,10 +55,10 @@ CHIP Decoder201498887 {
   And (a=nA, b=nC, out=dtmp3);
   And (a=dtmp3, b=nD, out=dterm3);
   And (a=A, b=C, out=dtmp4);
-  And (a=dtmp4, b=D, out=exclude_d);
-  Not (in=exclude_d, out=nexclude_d);
-  And (a=nB, b=nexclude_d, out=gated_nB);
-  Or (a=gated_nB, b=dterm2, out=dor1);
+  And (a=dtmp4, b=D, out=excluded);
+  Not (in=excluded, out=nexcluded);
+  And (a=nB, b=nexcluded, out=gatednB);
+  Or (a=gatednB, b=dterm2, out=dor1);
   Or (a=dor1, b=dterm3, out=d);
   // Segment e = std_c: B | D | ~C
   Or (a=B, b=D, out=eor1);
